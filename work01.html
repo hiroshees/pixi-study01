@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work01</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+let app = new PIXI.Application({
+  width: 800, 
+  height: 600,
+  backgroundColor: 0x9AD2FF,
+});
+document.body.appendChild(app.view);
+
+let sprite = PIXI.Sprite.from('assets/images/sample.png');
+app.stage.addChild(sprite);
+
+// Add a ticker callback to move the sprite back and forth
+let elapsed = 0.0;
+app.ticker.add((delta) => {
+  elapsed += delta;
+  sprite.x = 100.0 + Math.cos(elapsed/50.0) * 100.0;
+});
+</script>
+</body>
+</html>
