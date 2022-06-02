@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work05</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+// Create the application helper and add its render target to the page
+let app = new PIXI.Application({
+  width: 800, 
+  height: 600,
+  backgroundColor: 0x1099bb, 
+});
+document.body.appendChild(app.view);
+
+let container = new PIXI.Container();
+app.stage.addChild(container);
+
+let star = PIXI.Sprite.from('assets/images/star.png');
+container.addChild(star);
+star.anchor.set(0.5);
+star.position.set(100,100);
+
+app.ticker.add((delta) => {
+  star.angle++;
+});
+</script>
+</body>
+</html>
