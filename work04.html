@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work04</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+// Create the application helper and add its render target to the page
+let app = new PIXI.Application({
+  width: 640, 
+  height: 360,
+  backgroundColor: 0x1099bb, 
+});
+document.body.appendChild(app.view);
+
+// フレーム作成
+let frame = new PIXI.Graphics();
+// 背景色
+frame.beginFill(0xff0000);
+// 枠線
+frame.lineStyle({ color: 0xffffff, width: 4, alignment: 0 });
+// 四角形作成
+frame.drawRect(0, 0, 250, 250);
+// フレームの位置
+frame.position.set(100, 50);
+app.stage.addChild(frame);
+
+// マスク用オブジェクト作成
+let mask = new PIXI.Graphics();
+// 背景色
+mask.beginFill(0xffffff);
+mask.drawRect(0,0,200,240);
+mask.endFill();
+
+// コンテナ作成
+let maskContainer = new PIXI.Container();
+// コンテナのマスク設定
+maskContainer.mask = mask;
+// マスクを追加
+maskContainer.addChild(mask);
+// 位置
+maskContainer.position.set(4,4);
+// 追加
+frame.addChild(maskContainer);
+
+// テキスト作成
+let text = new PIXI.Text(
+  'This text will scroll up and be masked, so you can see how masking works.  Lorem ipsum and all that.\n\n' +
+  'You can put anything in the container and it will be masked!',
+  {
+    fontSize: 24,
+    fill: 0x1010ff,
+    wordWrap: true,
+    wordWrapWidth: 180
+  }
+);
+text.x = 10;
+maskContainer.addChild(text);
+
+// Add a ticker callback to scroll the text up and down
+let elapsed = 0.0;
+app.ticker.add((delta) => {
+  // Update the text's y coordinate to scroll it
+  elapsed += delta;
+  text.y = 10 + -100.0 + Math.cos(elapsed/50.0) * 100.0;
+});
+</script>
+</body>
+</html>
