@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work08</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+const app = new PIXI.Application({ backgroundColor: 0x1099bb });
+document.body.appendChild(app.view);
+
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
+const sprite = PIXI.Sprite.from('assets/images/bunny.png');
+sprite.anchor.set(0.5);
+sprite.x = app.screen.width / 2;
+sprite.y = app.screen.height / 2;
+sprite.interactive = true;
+sprite.buttonMode = true;
+sprite.on('click', (event) =>{
+    sprite.scale.x *= 1.25;
+    sprite.scale.y *= 1.25;
+});
+app.stage.addChild(sprite);
+
+// Alternatively, use the mouse & touch events:
+// sprite.on('click', onClick); // mouse-only
+// sprite.on('tap', onClick); // touch-only
+
+</script>
+</body>
+</html>

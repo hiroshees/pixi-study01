@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work12</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+const app = new PIXI.Application({ backgroundColor: 0x1099bb });
+document.body.appendChild(app.view);
+
+const bunny = PIXI.Sprite.from('assets/images/bunny.png');
+bunny.anchor.set(0.5);
+bunny.x = app.screen.width / 2;
+bunny.y = app.screen.height / 2;
+app.stage.addChild(bunny);
+
+let elapsed = 0.0;
+app.ticker.add((delta) => {
+    //bunny.rotation += 0.1 * delta;
+    //bunny.rotation += 0.1;
+    //bunny.scale.x += 0.1;
+    //bunny.scale.y += 0.1;
+    elapsed += delta;
+    bunny.scale.x = 5.0 + Math.sin(elapsed/50.0) * 5.0;
+});
+</script>
+</body>
+</html>
