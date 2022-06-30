@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>work12</title>
+<script src="https://pixijs.download/v6.4.0/pixi.min.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<script>
+const app = new PIXI.Application({
+    transparent: true,
+    width: window.innerWidth, 
+    height: window.innerHeight,
+});
+document.body.appendChild(app.view);
+
+const tigers = [];
+
+for( let i = 0; i < 5; i++) {
+    const tiger = PIXI.Sprite.from('assets/images/tora.png');
+    tiger.anchor.set(0.5);
+    tiger.scale.set(0.2);
+    
+    tiger.x = Math.random() * app.screen.width;
+    tiger.y = Math.random() * app.screen.height;
+    tiger.tint = Math.random() * 0xFFFFFF;
+    
+    app.stage.addChild(tiger);
+    tigers.push(tiger);
+}
+
+app.ticker.add(() => {
+    for( let i = 0; i < tigers.length; i++) {
+        const tiger = tigers[i];
+        tiger.rotation += 0.1;
+    }
+});
+
+</script>
+</body>
+</html>
